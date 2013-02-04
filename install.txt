@@ -1,0 +1,165 @@
+1) Import lingual variables:
+	
+	1.1) Go to Control Panel(cp) -> System -> Languages -> "Import from a File" (default English version is provided)
+	1.2) choose en.ini file
+	1.3) click "Import from file"
+	
+	Note: Default language is English. If you want to import lingaul variables for a different language you can either translate the values in the ini file first or do it later from "Language variables" in the Control Panel.
+	
+2) Unpack "catalog.v.1.3.rar" in the site root or copy the files from the archive in their coresponding folders in the site root.
+	For Example:
+	All .php files (located in: root\cmp) have to be placed in cmp folder (located in: root\cmp) of the site root.
+	
+	Note: Repeated this action for all files from the archive.
+	
+3) Create 3 new components.
+	
+	3.1) Create a component (Go to Control Panel(cp) -> System -> Components -> Add) and set the following values: 
+	
+		3.1.1) system name 						-> catalog-packages
+		3.1.2) public name 						-> Catalog Packages
+		3.1.3) PHP Class Name 					-> cmp/back/CatalogPackages
+		3.1.4) Participate in Admin Menu Group	-> check
+		   
+		and click Save.
+		
+		3.1.5)  Set Module settings of catalog-packages component:
+			Database Table -> Database Table name
+			Upload Folder -> Folder for catalog uploads within the site's upload folder, for example upload/this_folder
+			Supported File Types -> File extensions permitted for upload separated with comma, for example jpg,jpeg,gif,png
+			Maximum Allowed File Size -> Maximum allowed file size. Allowed expressions "10 M" for 10 MB or "100 KB" for 100 KB
+
+	3.2) Create a component (Go to Control Panel(cp) -> System -> Components -> Add) and set the following values: 
+	
+		3.2.1) system name 		-> catalog-items
+		3.2.2) public name 		-> Catalog Items
+		3.2.3) PHP Class Name 	-> cmp/back/CatalogItems
+		3.2.4) Parent 			-> catalog-packages
+		
+		and click Save.
+	
+		3.2.5) Set Module settings of catalog-items component:
+			Database Table 				-> Database Table name
+			Upload Folder 				-> Folder for catalog uploads within the site's upload folder, for example upload/this_folder
+			Supported File Types 		-> File extensions permitted for upload separated with comma, for example jpg,jpeg,gif,png
+			Maximum Allowed File Size 	-> Maximum allowed file size. Allowed expressions "10 M" for 10 MB or "100 KB" for 100 KB
+	
+	3.3) Create a component (Go to Control Panel(cp) -> System -> Components -> Add) and set the following values: 
+	
+		3.3.1) system name 		-> catalog
+		3.3.2) public name 		-> Catalog
+		3.3.3) PHP Class Name 	-> cmp/front/Catalog
+		
+		and click Save.
+			
+		3.3.5) Set Module Settings:
+			Components 		-> catalog -> module settings
+			Target Module 	-> Backend Parent Module for Catalog component, in this case "Catalog Packages"
+			List Template 	-> Template for directory mode, located in themes/your_theme/tpl 
+			View Template 	-> Template for single item mode, located in themes/your_theme/tpl 
+			Paging Limit  	-> Limit of items that are on the same structure level per page
+		   
+			and click Update.
+
+4) Go to the newly appeared menu item Catalog Packages -> use Add in order to add items.
+
+6) Create a page (Go to Control Panel(cp) -> System -> Pages -> Add) and set the following values:
+
+	6.1) system name 	-> catalog	
+	6.2) public name 	-> Catalog
+	6.3) component name -> catalog
+	6.4) choose the page from "Include in menu" to add it to the menu
+   
+	and click Save.
+
+7) Open the Frontend of the website and click Catalog from the menu or go to URL http://your_site_domain/en/catalog/ where en is code of your default language
+
+8) Optional 
+You can add additional Components Articles and Documents.
+
+	8.1) Create Articles (Go to Control Panel(cp) -> System -> Components -> Add) and set the following values: 
+
+		8.1.1) system name 		-> catalog-articles
+		8.1.2) public name 		-> Catalog Articles
+		8.1.3) PHP Class Name 	-> cmp/back/CatalogArticles
+		8.1.4) Parent			-> Catalog Items
+		
+		and click Save.
+		
+		8.1.5) Set Module settings:
+			Database Table 				-> Database Table name 
+			Upload Folder 				-> Folder for catalog uploads within the site's upload folder, for example upload/this_folder
+			Supported File Types 		-> File extensions permitted for upload separated with comma, for example jpg,jpeg,gif,png
+			Maximum Allowed File Size 	-> Maximum allowed file size. Allowed expressions "10 M" for 10 MB or "100 KB" for 100 KB
+		
+		
+	8.2) Create Documents (Go to Control Panel(cp) -> System -> Components -> Add) and set the following values: 
+
+		8.2.1) system name 		-> catalog-documents
+		8.2.2) public name 		-> Catalog Documents
+		8.2.3) PHP Class Name 	-> cmp/back/CatalogDocuments
+		8.2.4) Parent			-> Catalog Articles
+		
+		and click Save.
+		
+		8.2.5) Set Module settings
+			Database Table 				-> Database Table name
+			Upload Folder 				-> Folder for catalog uploads within the site's upload folder, for example upload/this_folder
+			Supported File Types 		-> File extensions permitted for upload separated with comma, for example jpg,jpeg,gif,png
+			Maximum Allowed File Size 	-> Maximum allowed file size Allowed expressions "10 M" for 10 MB or "100 KB" for 100 KB
+	
+9) Catalog Component as News Module (Simplified)
+ 
+	9.1) Create a component (Go to Control Panel(cp) -> System -> Components -> Add) with the following values: 
+		9.1.1) system name 						-> news-packages
+		9.1.2) public name 						-> News Packages
+		9.1.3) PHP Class Name 					-> cmp/back/CatalogPackages
+		9.1.4) Participate in Admin Menu Group	-> check
+		
+		and click Save.	
+			
+		9.1.5) Set Module settings:
+			Database Table 				-> Database Table name. If you have installed catalog module change the database name to 'newscatalog'
+			Upload Folder 				-> Folder for catalog uploads within the site's upload folder, for example upload/this_folder
+			Supported File Types 		-> File extensions permitted for upload separated with comma, for example jpg,jpeg,gif,png
+			Maximum Allowed File Size 	-> Maximum allowed file size. Allowed expressions "10 M" for 10 MB or "100 KB" for 100 KB
+		
+	9.2) Add the next component with the following values:
+		9.2.1) system name 		-> new-catalog
+		9.2.2) public name 		-> News
+		9.2.3) PHP Class Name 	-> cmp/front/Catalog
+		
+		and click Save.
+		
+		9.2.4) Set Module Settings:
+			Components 		-> catalog -> module settings
+			Target Module 	-> Set From Modules/Catalog -> Module settings -> Target module -> News Packages
+			List Template  	-> Template for directory mode, located in themes/your_theme/tpl 
+				If you have instance of catalog already create copy of catalog-list.tpl as catalog-newslist.tpl and set it in the settings, else just keep catalog-list.tpl
+			View Template 	-> Template for single item mode, located in themes/your_theme/tpl 
+				If you have instance of catalog already create copy of catalog-view.tpl as catalog-newsview.tpl and set it in the settings, else just keep catalog-view.tpl
+			Paging Limit 	-> Limit of items that are on the same structure level per page
+		   
+			and click Update.
+		
+		9.2.5) Newest Articles to be showed first
+			Go to cmp/front/catalog.cmp.php on row 75 and replace
+				'data' => $data,
+			with 
+				'data' => array_reverse($data),	
+				
+		Add news in Catalog Packages menu in the backend and keep them on the same level (no sub articles)
+		
+	9.3) Add news page (Go to Control Panel -> Pages -> Add)
+		9.3.1) system name 		-> news	
+		9.3.2) public name 		-> News
+		9.3.3) component name 	-> News
+		9.3.4) choose the page from "Include in menu" to add it to the menu
+	   
+		and click Save.
+
+		Note: If you use package for the News module, you have to add Date ield as well.
+
+That is all :)
+
+Thank you for your interest and enjoy SBND F&CMS - Framework & CMS for PHP developers.

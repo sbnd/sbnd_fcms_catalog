@@ -1,4 +1,4 @@
-Catalog component
+Catalog Component
 =================
 The nature of this component is a universal catalogue structure. It supports unlimited levels in deep and can be used to create the most common catalogues structures needed like “News”, “Gallery”, “Documents”, “Product catalog” , etc. or a MIXTURE of all of them. 
 

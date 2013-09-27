@@ -31,29 +31,29 @@
  */
 class CatalogItems extends CmsComponent{
 	/**
+	 * Component db table
+	 * @access public
+	 * @var string
+	 */
+	public $base = 'items';
+	/**
+	 * Max size of uploaded file
+	 * @access public
+	 * @var string
+	 */
+	public $max_file_size = '5M';
+	/**
      * Upload folder
      * @access public
      * @var string
      */
-	public $upload_folder 	   = 'upload/articles';
+	public $upload_folder = 'upload/articles';
 	/**
 	 * Supported file types
 	 * @access public
 	 * @var string
 	 */
     public $support_file_types = 'jpg,jpeg,gif,png';
-    /**
-     * Component db table
-     * @access public
-     * @var string
-     */
-    public $base 			   = 'items';
-    /**
-     * Max size of uploaded file
-     * @access public
-     * @var string
-     */
-   	public $max_file_size      = '5M';
    /**
     * Main function - the constructor of the component
     * @access public

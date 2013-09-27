@@ -35,23 +35,85 @@ class CatalogGallery extends CatalogItems{
      * @access public
      * @var string
      */
-	public $base 		  = 'gallery';
+	public $base = 'gallery';
 	/**
      * Upload folder
      * @access public
      * @var string
      */
 	public $upload_folder = 'upload/gallery';
+	/**
+	 * @var string
+	 */
+	private $ext = '';
+	/**
+	 * @var number
+	 */
+	private $size = 0;
+	/**
+	 * (non-PHPdoc)
+	 * @see CatalogItems::main()
+	 */
+	function main(){
+		parent::main();
+		
+		$this->updateField('file', array(
+			'attributes' => array(
+				'onComplete' => array($this, 'sizeAndType')
+			)
+		));
+		$this->setField('size', array(
+			'formtype' => 'none'
+		));
+		$this->setField('extention', array(
+			'formtype' => 'none',
+			'length' => 10
+		));
+	}
+	/**
+	 * @param BasicUpload $obj
+	 */
+	function sizeAndType($obj){
+		$this->ext = $obj->type;
+		$this->size = $obj->size;
+	}
     /**
 	 * Extends parent method adding mapping for column in list view
 	 * @access public
 	 * @return string html for list view
 	 */
 	function ActionList(){
-		$this->map('file'  , BASIC_LANGUAGE::init()->get('image'), 'mapFormatter', 'width=200', 'align=left'); 
-		$this->map('title' , BASIC_LANGUAGE::init()->get('title'), 'mapFormatter', 'align=left'); 
-		$this->map('active', BASIC_LANGUAGE::init()->get('content_pblish_label') , 'mapFormatter', 'align=left'); 
+		$this->map('file'  , 	BASIC_LANGUAGE::init()->get('image'), 'mapFormatter', 'width=200', 'align=left'); 
+		$this->map('title' , 	BASIC_LANGUAGE::init()->get('title'), 'mapFormatter', 'align=left'); 
+		$this->map('active', 	BASIC_LANGUAGE::init()->get('content_pblish_label') , 'mapFormatter', 'align=left'); 
+		$this->map('size', 		BASIC_LANGUAGE::init()->get('size') , 'mapFormatter', 'align=left'); 
+		$this->map('extention', BASIC_LANGUAGE::init()->get('extention') , 'mapFormatter', 'align=left'); 
 
 		return parent::ActionList();
+	}
+	/**
+	 * (non-PHPdoc)
+	 * @see CmsComponent::ActionSave()
+	 */
+	function ActionSave($id){
+		if($id = parent::ActionSave($id)){
+			$this->cleanBuffer();
+			
+			$this->setDataBuffer('size', $this->size);
+			$this->setDataBuffer('extention', $this->ext);
+			
+			$id = parent::ActionSave($id);
+		}
+		return $id;
+	}
+	/**
+	 * (non-PHPdoc)
+	 * @see CatalogItems::mapFormatter()
+	 */
+	function mapFormatter($val, $name, $row){
+		if($name == 'size'){
+			return BASIC::init()->biteToString($val);
+		}
+		return parent::mapFormatter($val, $name, $row);
 	}
 }

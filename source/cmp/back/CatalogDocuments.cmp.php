@@ -22,32 +22,32 @@
 * @version 1.4
 */
 
-BASIC::init()->imported('CatalogItems.cmp', BASIC::init()->package(__FILE__));
+BASIC::init()->imported('CatalogGallery.cmp', BASIC::init()->package(__FILE__));
 /**
  * @author Evgeni Baldzhiyski
  * @version 0.1 
  * @since 29.03.2012
  * @package cms.catalog.back
  */
-class CatalogDocuments extends CatalogItems{
+class CatalogDocuments extends CatalogGallery{
+	/**
+	 * Component db table
+	 * @access public
+	 * @var string
+	 */
+	public $base = 'documents';
+	/**
+	 * Upload folder
+	 * @access public
+	 * @var string
+	 */
+	public $upload_folder = 'upload/documents';	
 	/**
 	 * Supported file types
 	 * @access public
 	 * @var string
 	 */
     public $support_file_types = 'txt,pdf,doc,docx,xls,xlsx';
-    /**
-     * Upload folder
-     * @access public
-     * @var string
-     */
-	public $upload_folder 	   = 'upload/documents';
-    /**
-     * Component db table
-     * @access public
-     * @var string
-     */
-	public $base			   = 'documents';
    	/**
     * Main function - the constructor of the component
     * @access public
@@ -58,7 +58,7 @@ class CatalogDocuments extends CatalogItems{
 		
 		$this->updateField('file', array(
 			'text' => BASIC_LANGUAGE::init()->get('file')
-		));
+		));	
 	}
 	/**
 	 * Extends parent method adding mapping for column in list view
@@ -66,7 +66,7 @@ class CatalogDocuments extends CatalogItems{
 	 * @return string html for list view
 	 */
 	function ActionList(){ 
-		$this->map('title', BASIC_LANGUAGE::init()->get('title'), 'mapFormatter', 'align=left'); 
+		$this->map('title',  BASIC_LANGUAGE::init()->get('title'), 'mapFormatter', 'align=left'); 
 		$this->map('active', BASIC_LANGUAGE::init()->get('content_pblish_label'), 'mapFormatter', 'align=left'); 
 		
 		return parent::ActionList();

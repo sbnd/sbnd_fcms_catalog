@@ -19,7 +19,7 @@
 *
 * @author SBND Techologies Ltd <info@sbnd.net>
 * @package cms.cmp.front.catalog
-* @version 1.4
+* @version 1.5
 */
 
 BASIC::init()->imported('SearchBar.cmp', 'cms/controlers/front');
@@ -415,9 +415,65 @@ class Catalog extends CmsBox implements SearchBarInterface{
 	/**
 	 * @todo need to be  implemented
 	 */
-	function getMatchData($criteria){
-		
+	public function getMatchData($criteria){
+		if(!$this->baseBuild = Builder::init()->build($this->target)){
+			return array();
+		}	
+		return $this->_getMatchData($criteria, $this->baseBuild);
 	}
+	protected function _getMatchData($criteria, $el){
+		$res = array();
+		$tree = false;
+		
+		$search_criteria = array('name', 'title');
+		$advanse_search_criteria = array('name', 'title', 'short_desc', 'desc');
+		
+		$scriteria = $search_criteria;
+		if($el instanceof Tree){
+			$tree = true;
+			$scriteria = $advanse_search_criteria;
+		}
+		if($el instanceof CatalogArticles){
+			$scriteria = $advanse_search_criteria;
+		}
+		
+		
+		$rdr = $el->read(" AND (".SearchBar::buildSqlCriteria($scriteria, array($criteria[0])).") ");
+		if(!$rdr->num_rows()){
+			unset($criteria[0]);
+			$rdr = $el->read(" AND (".SearchBar::buildSqlCriteria($scriteria, $criteria).") ");
+		}
+		while($rdr->read()){
+			$rdr->setItem('href', BASIC_URL::init()->link(Builder::init()->pagesControler->getPageTreeByComponent($this->model->system_name).
+				$this->searchBuildNavigation($el, $rdr->item('id'))
+			));
+		
+			$res[] = $rdr->getItems();
+		}
+		
+		foreach ($el->model->child as $child){
+			foreach ($this->_getMatchData($criteria, $el->buildChild($child->system_name)) as $v){
+				$res[] = $v;
+			}
+		}
+		return $res;
+	}
+	protected function searchBuildNavigation($target, $id){
+		$rtn = '';
+		if($target instanceof Tree){
+			
+		}else{
+			if($res = $target->getRecord($id)){
+				if($target->model->param){
+					$rtn .= $this->searchBuildNavigation($target->buildParent(), $res['_parent_id']);
+				}
+				$rtn .= $res['name']."/";
+			}
+			$rtn = '';
+		}
+		return $rtn;
+	}
+	
 
 	
 	function isRequireSettings(){

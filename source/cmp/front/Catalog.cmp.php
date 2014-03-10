@@ -23,6 +23,7 @@
 */
 
 BASIC::init()->imported('SearchBar.cmp', 'cms/controlers/front');
+
 /**
  * The paging will set in catalog start page and for first child on current select item.
  * 
@@ -150,7 +151,6 @@ class Catalog extends CmsBox implements SearchBarInterface{
 				Builder::init()->breadcrumb($this->breadcrumbs[$k]);
 			}
 		}
-
 		return BASIC_TEMPLATE2::init()->set(array(
 			'data' => $data,
 			'paging_bar' => $this->paging->getBar()
@@ -413,18 +413,22 @@ class Catalog extends CmsBox implements SearchBarInterface{
 	// Interfaces //
 	
 	/**
-	 * @todo need to be  implemented
+	 * SearchBarInterface implementation
 	 */
-	public function getMatchData($criteria){
+     public function getMatchData($criteria, $lenght_short_search_results){
+		
 		if(!$this->baseBuild = Builder::init()->build($this->target)){
 			return array();
 		}	
 		return $this->_getMatchData($criteria, $this->baseBuild);
 	}
 	protected function _getMatchData($criteria, $el){
+		//this is needed for the recursion when called from childs
+		$old_criteria = $criteria;
+		
 		$res = array();
 		$tree = false;
-		
+
 		$search_criteria = array('name', 'title');
 		$advanse_search_criteria = array('name', 'title', 'short_desc', 'desc');
 		
@@ -436,9 +440,9 @@ class Catalog extends CmsBox implements SearchBarInterface{
 		if($el instanceof CatalogArticles){
 			$scriteria = $advanse_search_criteria;
 		}
+	
+		$rdr = $el->read(" AND (".SearchBar::buildSqlCriteria($scriteria, array($criteria[0])).") ");			
 		
-		
-		$rdr = $el->read(" AND (".SearchBar::buildSqlCriteria($scriteria, array($criteria[0])).") ");
 		if(!$rdr->num_rows()){
 			unset($criteria[0]);
 			$rdr = $el->read(" AND (".SearchBar::buildSqlCriteria($scriteria, $criteria).") ");
@@ -447,12 +451,10 @@ class Catalog extends CmsBox implements SearchBarInterface{
 			$rdr->setItem('href', BASIC_URL::init()->link(Builder::init()->pagesControler->getPageTreeByComponent($this->model->system_name).
 				$this->searchBuildNavigation($el, $rdr->item('id'))
 			));
-		
 			$res[] = $rdr->getItems();
 		}
-		
 		foreach ($el->model->child as $child){
-			foreach ($this->_getMatchData($criteria, $el->buildChild($child->system_name)) as $v){
+			foreach ($this->_getMatchData($old_criteria, $el->buildChild($child->system_name)) as $v){
 				$res[] = $v;
 			}
 		}
@@ -461,7 +463,7 @@ class Catalog extends CmsBox implements SearchBarInterface{
 	protected function searchBuildNavigation($target, $id){
 		$rtn = '';
 		if($target instanceof Tree){
-			
+		
 		}else{
 			if($res = $target->getRecord($id)){
 				if($target->model->param){

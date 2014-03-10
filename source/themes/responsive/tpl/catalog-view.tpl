@@ -7,7 +7,7 @@
   -->
 <table width="100%" cellpadding="2" cellspacing="0">
 	<tr>
-		<td valign="top"><a href="${VIRTUAL}${data.file}"><!-- image(${data.file},width=300|height=300) --></a></td>
+		<td valign="top"><a href="${VIRTUAL}${data.file}"><!-- image(${data.file},width=300|height=300|alt=${data.title}|name=${data.title}) --></a></td>
 		<td valign="top" width="100%">
 			<h2>${data.title}</h2>
 			<div class="cat_descr">${data.desc}</div>
@@ -44,7 +44,7 @@
 				<!-- else -->
 				<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-						<td valign="top"><!-- image(${item.file},width=100|height=100) --></td>
+						<td valign="top"><!-- image(${item.file},width=100|height=100|alt=${item.title}|name=${item.title}) --></td>
 						<td valign="top" width="100%">
 							<h2><a href="${item.href}">${item.title}</a></h2>
 							<div class="cat_descr">${item.short_desc}</div>

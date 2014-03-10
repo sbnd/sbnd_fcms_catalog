@@ -1,0 +1,15 @@
+<!-- package name -->
+<name>Catalog</name>
+<!-- package version -->
+<version>1.6</version>
+<!-- minimum cms version for this package -->
+<cms-version>7.0.6</cms-version>
+<!-- package description and help -->
+<description></description>
+
+<!-- package installation commangs or scripts -->
+<instal>
+	<script></script>
+	<php></php>
+	<sql></sql>
+<install>

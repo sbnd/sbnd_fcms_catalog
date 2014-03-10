@@ -6,7 +6,7 @@
 		<h2>${data.title}</h2>
 		<div class="cat_descr">
 			<!--
-				<!-- image(${data.image},width=80|height=80) -->
+				<!-- image(${data.image},width=80|height=80|alt=${data.title}|name=${data.title}) -->
 			-->
 			${data.short_desc}
 		</div>
@@ -15,7 +15,7 @@
 		<!-- if(${c}) -->&nbsp;|&nbsp;<!-- end -->
 		<a href="${sub.href}">
 			<!--
-				<!-- image(${sub.image},width=30|height=30) -->
+				<!-- image(${sub.image},width=30|height=30|alt=${data.title}|name=${data.title}) -->
 			-->
 			${sub.title}
 		</a>
@@ -41,7 +41,7 @@
 					<!-- ifelse(${name} == ' --- add you reg component name --- ') -->
 					
 					<!-- else -->
-						<td valign="top"><!-- image(${item.file},width=100|height=100) --></td>
+						<td valign="top"><!-- image(${item.file},width=100|height=100|alt=${item.title}|name=${item.title}) --></td>
 						<td valign="top" width="100%">
 							<h2><a href="${item.href}">${item.title}</a></h2>
 							<div class="cat_descr">${item.short_desc}</div>
@@ -68,7 +68,7 @@
 		<h2><a href="${cat.href}">${cat.title}</a></h2>
 		<div class="cat_descr">
 			<!--
-				<!-- image(${cat.image},width=80|height=80) -->
+				<!-- image(${cat.image},width=80|height=80|alt=${cat.title}|name=${cat.title}) -->
 			-->
 			${cat.short_desc}
 		</div>
@@ -79,7 +79,7 @@
 			<!-- foreach(${cat._subs_},sub) -->
 			<a href="${sub.href}">
 				<!-- 
-					<!-- image(${sub.image},width=30|height=30) -->
+					<!-- image(${sub.image},width=30|height=30|alt=${sub.title}|name=${sub.title}) -->
 				-->
 				${sub.title}</a>&nbsp;|&nbsp;
 			<!-- end -->
@@ -103,7 +103,7 @@
 					<!-- ifelse(${name} == ' --- add you reg component name --- ') -->
 					
 					<!-- else -->
-						<li class="cat_note_s"><a href="${item.href}" title="${item.title}"><!-- image(${item.file},width=30|height=30) --></a></li>
+						<li class="cat_note_s"><a href="${item.href}" title="${item.title}"><!-- image(${item.file},width=30|height=30|alt=${item.title}|name=${item.title}) --></a></li>
 					<!-- end -->
 				<!-- end -->
 			</ul>

@@ -6,7 +6,7 @@
 	
 	Note: Default language is English. If you want to import lingaul variables for a different language you can either translate the values in the ini file first or do it later from "Language variables" in the Control Panel.
 	
-2) Unpack "catalog.v.1.5.rar" in the site root or copy the files from the archive in their coresponding folders in the site root.
+2) Unpack "catalog.v.1.6.zip" in the site root or copy the files from the archive in their coresponding folders in the site root.
 	For Example:
 	All .php files (located in: root\cmp) have to be placed in cmp folder (located in: root\cmp) of the site root.
 	
@@ -60,7 +60,7 @@
 			Paging Limit  	-> Limit of items that are on the same structure level per page
 		   
 			and click Update.
-
+	
 4) Go to the newly appeared menu item Catalog Packages -> use Add in order to add items.
 
 6) Create a page (Go to Control Panel(cp) -> System -> Pages -> Add) and set the following values:

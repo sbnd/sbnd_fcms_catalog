@@ -60,16 +60,10 @@ class CatalogDocuments extends CatalogGallery{
 			'text' => BASIC_LANGUAGE::init()->get('file')
 		));	
 	}
-	/**
-	 * Extends parent method adding mapping for column in list view
-	 * @access public
-	 * @return string html for list view
-	 */
-	function ActionList(){ 
-		$this->map('title',  BASIC_LANGUAGE::init()->get('title'), 'mapFormatter', 'align=left'); 
-		$this->map('active', BASIC_LANGUAGE::init()->get('content_pblish_label'), 'mapFormatter', 'align=left'); 
-		
-		return parent::ActionList();
+	function map($field, $header, $colback = '', $attribute = '', $sort = true){
+		if($field != 'file'){
+			parent::map($field, $header, $colback, $attribute, $sort);
+		}
 	}
 	/**
 	 * Help method using in column maping for cell formating
@@ -84,5 +78,27 @@ class CatalogDocuments extends CatalogGallery{
 	  		return BASIC_GENERATOR::init()->link($val, BASIC::init()->ini_get('root_virtual').$row['file']);
 	  	}
 	  	return parent::mapFormatter($val, $name, $row);
+	}
+	/**
+	 * Define module settings fields, which values will override value of class properties
+	 * @access public
+	 * @return hashmap
+	 */
+	function settingsData(){
+		$tmp = parent::settingsData();
+		unset($tmp['thumbs']);
+	
+		return $tmp;
+	}
+	/**
+	 * Module settings fields description
+	 * @access public
+	 * @return value
+	 */
+	function settingsUI(){
+		$tmp = parent::settingsUI();
+		unset($tmp['thumbs']);
+
+		return $tmp;
 	}
 }

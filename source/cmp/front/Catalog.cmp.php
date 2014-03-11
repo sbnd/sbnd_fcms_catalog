@@ -2,7 +2,7 @@
 /**
 * SBND F&CMS - Framework & CMS for PHP developers
 *
-* Copyright (C) 1999 - 2013, SBND Technologies Ltd, Sofia, info@sbnd.net, http://sbnd.net
+* Copyright (C) 1999 - 2014, SBND Technologies Ltd, Sofia, info@sbnd.net, http://sbnd.net
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -18,20 +18,15 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *
 * @author SBND Techologies Ltd <info@sbnd.net>
-* @package cms.cmp.front.catalog
-* @version 1.5
+* @package cmp.front.catalog
+* @version 1.6
 */
 
 BASIC::init()->imported('SearchBar.cmp', 'cms/controlers/front');
 
 /**
  * The paging will set in catalog start page and for first child on current select item.
- * 
- * @author Evgeni Baldzhiyski
- * @version 0.4
- * @since 28.03.2012
- * @package cmp.catalog.front
- */
+*/
 class Catalog extends CmsBox implements SearchBarInterface{
 	/**
 	 * Backend component for the catalog

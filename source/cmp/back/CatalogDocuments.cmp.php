@@ -2,7 +2,7 @@
 /**
 * SBND F&CMS - Framework & CMS for PHP developers
 *
-* Copyright (C) 1999 - 2013, SBND Technologies Ltd, Sofia, info@sbnd.net, http://sbnd.net
+* Copyright (C) 1999 - 2014, SBND Technologies Ltd, Sofia, info@sbnd.net, http://sbnd.net
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -18,17 +18,12 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *
 * @author SBND Techologies Ltd <info@sbnd.net>
-* @package cms.cmp.back.catalog
-* @version 1.4
+* @package cmp.back.catalog
+* @version 1.6
 */
 
 BASIC::init()->imported('CatalogGallery.cmp', BASIC::init()->package(__FILE__));
-/**
- * @author Evgeni Baldzhiyski
- * @version 0.1 
- * @since 29.03.2012
- * @package cms.catalog.back
- */
+
 class CatalogDocuments extends CatalogGallery{
 	/**
 	 * Component db table

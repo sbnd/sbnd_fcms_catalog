@@ -4,10 +4,10 @@
 # [Catalog Component](http://fcms.sbnd.net/en/download/) 
 
 =================
-The nature of this component is a universal catalogue structure. It supports unlimited levels in deep and can be used to create the most common catalogues structures needed like "News", "Gallery", "Documents", "Product catalog" , etc. or a MIXTURE of all of them. 
+Using this component you can create a universal catalog structure. It supports unlimited levels of depth and can be used to create catalog structures such as "News", "Gallery", "Documents", "Product Catalog" or a mixture of all of them.
 
 **The component has:**
-- backend part, accessible from backend login form : domain/cp 
-- frontend part visible for the site visitors
+- Backend part, accessible from the administration panel form: domain/cp. 
+- Frontend part, visible for the site's visitors.
 
-For more information: **http://fcms.sbnd.net/**
+For more information, see: **http://fcms.sbnd.net/**

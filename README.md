@@ -6,7 +6,7 @@
 =================
 Using this component you can create a universal catalog structure. It supports unlimited levels of depth and can be used to create catalog structures such as "News", "Gallery", "Documents", "Product Catalog" or a mixture of all of them.
 
-**The component has:**
+The component has:
 - Backend part, accessible from the administration panel form: domain/cp. 
 - Frontend part, visible for the site's visitors.
 
